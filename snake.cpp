@@ -1,4 +1,5 @@
-#include <windows.h>
+//#include <windows.h>
+#include <unistd.h>
 #include <iostream>
 #include <stdlib.h>
 #include <cmath>
@@ -28,7 +29,7 @@ static double a = 1.0;
 static int initialized = 0;
 static int initialLength = 2;
 
-static int sleeptime = 100;
+static int sleeptime = 100000;
 
 static int power = 0;
 
@@ -100,6 +101,7 @@ void plotBorder() {
 	glEnd();
 }
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+/*
 void drawString(const char* str) //屏幕显示字体
 {
 	static int isFirstCall = 1;
@@ -117,6 +119,7 @@ void drawString(const char* str) //屏幕显示字体
 		glCallList(lists + *str);
 	}
 }
+*/
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 void move(void) {
 	if (power == 0)
@@ -218,7 +221,7 @@ void move(void) {
 	delete[] dir;
 
 	glutPostRedisplay();
-	Sleep(sleeptime);
+	usleep(sleeptime);
 
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -270,12 +273,12 @@ void display(void)
 
 	plotBorder();
 
-	glColor3f(0.0f, 0.0f, 0.0f);	 //设置字体颜色
-	glRasterPos2i(-w + 17, w - 1);  //起始位置
-	string str1 = "Score: ";
-	string str2 = to_string(score);
-	string str = str1 + str2;
-	drawString(str.c_str());	 //输出的字符串
+	//glColor3f(0.0f, 0.0f, 0.0f);	 //设置字体颜色
+	//glRasterPos2i(-w + 17, w - 1);  //起始位置
+	//string str1 = "Score: ";
+	//string str2 = to_string(score);
+	//string str = str1 + str2;
+	//drawString(str.c_str());	 //输出的字符串
 
 	//glFlush();
 	glutSwapBuffers();

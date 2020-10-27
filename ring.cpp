@@ -9,18 +9,18 @@ using namespace std;
 static int WIN_WIDTH = 600;
 static int WIN_HEIGHT = 600;
 
-static float R = 0.8;	//Ô²»·°ë¾¶
-static float r = 0.1;	//ºá½ØÃæ°ë¾¶
+static float R = 0.8;	//Ô²ï¿½ï¿½ï¿½ë¾¶
+static float r = 0.1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶
 
 static int N = 100;
 static int M = 10;
 static float del_theta = 2 * M_PI / N;
 static float del_phi= 2 * M_PI / M;
 
-static float a = 0;	//×ª¶¯½Ç¶È
+static float a = 0;	//×ªï¿½ï¿½ï¿½Ç¶ï¿½
 static float b = 0;
 
-static bool power = 1;	//¿ØÖÆÔÝÍ£ºÍ¿ªÊ¼
+static bool power = 1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Í¿ï¿½Ê¼
 
 void reshape(int width, int height)
 {
@@ -51,7 +51,7 @@ void dis(void)
 	glLoadIdentity();
 	gluLookAt(0.0, 0.0, 4.0, 0.0, 0.0, 0.0, sin(b), cos(b), 0.0f);
 
-	glPushMatrix();	//µ÷»Ø×ª¶¯ËÙ¶È
+	glPushMatrix();	//ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ù¶ï¿½
 	glRotated(a, 1, 0, 0);
 
 	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
@@ -77,7 +77,7 @@ void dis(void)
 		}
 	}
 
-	glPopMatrix();	//µ÷»Ø×ª¶¯ËÙ¶È
+	glPopMatrix();	//ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ù¶ï¿½
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -117,14 +117,14 @@ void key_func(unsigned char key, int x, int y) {
 
 int main(int argc, char **argv)
 {
-	cout << "°´¿Õ¸ñ¼ü¿ØÖÆÔÝÍ£ºÍ¿ªÊ¼" << endl;
-	cout << "°´¡®ECS¡¯ÍË³ö" << endl;
+	cout << "ï¿½ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Í¿ï¿½Ê¼" << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ECSï¿½ï¿½ï¿½Ë³ï¿½" << endl;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowPosition(500, 100);
 	glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
-	glutCreateWindow("Ô²»·");
+	glutCreateWindow("åœ†çŽ¯");
 
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(dis);
