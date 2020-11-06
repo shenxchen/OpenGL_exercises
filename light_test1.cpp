@@ -8,10 +8,6 @@ using namespace std;
 static int WIN_WIDTH = 600;
 static int WIN_HEIGHT = 600;
 
-static float a = 0;
-
-static bool power = 1;
-
 void reshape(int width, int height)
 {
 	float ratio = 1.0 * width / height;
@@ -20,8 +16,6 @@ void reshape(int width, int height)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, ratio, 1, 1000);
-
-    
 }
 
 void disp(void)
@@ -30,35 +24,34 @@ void disp(void)
 	glLoadIdentity();
 	gluLookAt(0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0f, 1.0f, 0.0f);
 
-	glPushMatrix();
-	glRotated(a, 0, 1, 0);
-
-	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //glColor3f(1,0,0);
-    glutSolidTeapot(0.5);
+	GLfloat diffuse[] = { 1,1,1,1 };
+	GLfloat specular[] = { 1,1,1,1 };
+	GLfloat position[] = { 1,1,1,1 };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
 
+	float m_diffuse[] = { 1,1,0,1 };
+	float m_specular[] = { 0,0,0,1 };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, m_diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, m_specular);
+	
+	glPushMatrix();
+
+    glutSolidSphere(0.5,50,50);
 
 	glPopMatrix();
 
 	glFlush();
 }
 
-void move() {
-	if (power == 1) {
-		a += 0.1;
-		glutPostRedisplay();
-	}
-}
-
 void key_func(unsigned char key, int x, int y) {
 	switch (key)
 	{
-	case 32:
-		power = 1 - power;
-		break;
-
 	case 27:
 		exit(1);
 		break;
@@ -71,15 +64,16 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowPosition(500, 100);
 	glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
-	glutCreateWindow("1");
+	glutCreateWindow("π‚’’¡∑œ∞1");
 
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(disp);
-	glutIdleFunc(move);
 	glutKeyboardFunc(key_func);
 
 	glutMainLoop();
